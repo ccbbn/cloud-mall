@@ -1,0 +1,18 @@
+package EZ.nomargin.repository;
+
+import EZ.nomargin.domain.item.Item;
+
+import java.util.List;
+
+public interface ItemRepository {
+    Item save(Item item);
+    Item findById(Long itemId);
+    List<Item> findAll();
+    void update(Long itemId, Item updateItem);
+    void delete(Long itemId);
+    List<Item> findTop();
+    List<Item> findBottom();
+    List<Item> findOuter();
+
+
+}

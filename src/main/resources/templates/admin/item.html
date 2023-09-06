@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"
+          th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            list-style: none;
+            font-family: 'Noto Serif KR', serif;
+        }
+
+        .bg-dark {
+            background-color: black !important;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+        }
+
+        h2 {
+            font-weight: bold;
+        }
+
+        .edit-product {
+            background-color: black;
+            border: 0;
+        }
+
+        .cancel {
+            background-color: white;
+            border: 1px solid black;
+            color: black;
+        }
+
+        .item-images a{
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        .item-images img#file1,
+        .item-images img#file2,
+        .item-images img#file3,
+        .item-images img#file4,
+        .item-images img#file5 {
+            padding-top: 10px;
+            padding-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/admin/items">관리자 페이지</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/members">회원 관리</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/items">상품 관리</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/order/adminList">판매 관리</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" onclick="location.href='addForm.html'"
+                   th:onclick="|location.href='/'|" style="cursor: pointer;">홈으로</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center">
+        <h2>상품 상세</h2>
+    </div>
+    <h2 th:if="${param.status}" th:text="'저장 성공!'"></h2>
+    <div>
+        <label for="itemId">상품 ID</label>
+        <input type="text" id="itemId" name="itemId" class="form-control"
+               th:value="${item.itemId}" value="1" readonly>
+    </div>
+    <div>
+        <label for="itemName">상품명</label>
+        <input type="text" id="itemName" name="itemName" class="form-control"
+               th:value="${item.getItemName()}" value="상품A" readonly>
+    </div>
+    <div>
+        <label for="itemStore">판매처</label>
+        <input type="text" id="itemStore" name="itemStore" class="form-control"
+               th:value="${item.getItemStore()}" value="판매처A" readonly>
+    </div>
+    <div>
+        <label for="price">가격</label>
+        <input type="text" id="price" name="price" class="form-control"
+               th:value="${item.getPrice()}" value="10000" readonly>
+    </div>
+    <div>
+        <label for="stock">수량</label>
+        <input type="text" id="stock" name="stock" class="form-control"
+               th:value="${item.getStock()}" value="10" readonly>
+    </div>
+    <br>
+    <div>
+        <div>상품 종류</div>
+        <div th:each="type : ${ItemType}" class="form-check form-check-inline">
+            <input type="radio" th:field="${item.itemType}" th:value="${type.name()}" class="form-check-input" disabled>
+            <label th:for="${#ids.prev('itemType')}" th:text="${type.description}" class="form-check-label">
+                BOOK
+            </label>
+        </div>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="item-images">
+        <br>
+        <a>메인 이미지</a><br>
+        <img name="file1" id="file1" th:src="|/item/images/${item.mainImg}|"  width="300" height="300"/>
+        <br>
+        <a>디테일이미지1</a><br>
+        <img name="file2" id="file2" th:src="|/item/images/${item.getDetailImg1}|" width="300" height="300"/>
+        <br>
+        <a>디테일이미지2</a><br>
+        <img name="file3" id="file3" th:src="|/item/images/${item.getDetailImg2}|" width="300" height="300"/>
+        <br>
+        <a>디테일이미지3</a><br>
+        <img name="file4" id="file4" th:src="|/item/images/${item.getDetailImg3}|" width="300" height="300"/>
+        <br>
+        <a>사이즈 이미지</a><br>
+        <img name="file5" id="file5" th:src="|/item/images/${item.getSizeImg()}|" width="300" height="300"/>
+    </div>
+
+    <hr class="my-4">
+    <div class="row">
+        <div class="col">
+            <button class="w-100 btn btn-primary btn-lg edit-product"
+                    onclick="location.href='editForm.html'"
+                    th:onclick="|location.href='@{|/admin/edit/${item.getItemId()}|}'|"
+                    type="button">상품 수정
+            </button>
+        </div>
+        <div class="col">
+            <button class="w-100 btn btn-danger btn-lg cancel"
+                    onclick="location.href='/basic/products'"
+                    th:onclick="|location.href='@{|/admin/delete/${item.getItemId()}|}'|"
+                    type="button">상품 삭제
+            </button>
+        </div>
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg"
+                    onclick="location.href='/admin/items'"
+                    type="button">목록으로
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

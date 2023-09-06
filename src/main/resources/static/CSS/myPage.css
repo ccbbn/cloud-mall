@@ -1,0 +1,61 @@
+hr {
+    min-width: 1244px;
+}
+
+.myPage-container {
+    min-width: 1244px;
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: flex-start;
+    height: 800px;
+}
+
+.myPage-main {
+    position: sticky;
+    top: 80px;
+    padding: 30px 20px 0 5px;
+    display: flex;
+    flex-direction: row;
+    /*background: linear-gradient(to bottom, black 65%, white);*/
+    background-color: black;
+}
+
+.myPage-list {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding-left: 30px;
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    color: white;
+    font-weight: bold;
+}
+
+.myPage-list h2 {
+    margin-bottom: 30px;
+}
+
+.myPage-list li {
+    padding-top: 10px;
+    border-top: 1px solid white;
+    width: 120px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.myPage-list li a {
+    display: inline-block;
+    color: white;
+    font-weight: 300;
+}
+
+.myPage-list li a:hover {
+    font-size: 12.5pt;
+    display: inline-block;
+    color: white;
+}

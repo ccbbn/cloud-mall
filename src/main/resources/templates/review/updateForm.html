@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/CSS/review.css">
+<th:block th:replace="fragments/head :: headFragment">
+</th:block>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<body>
+<div class="container" id="wrapper">
+    <th:block th:replace="fragments/header :: headerFragment"></th:block>
+
+    <div class="board_wrap">
+        <div class="board_title">
+            <strong>후기 수정</strong>
+            <p>작성한 후기를 수정해주세요.</p>
+        </div>
+        <div class="board_write_wrap">
+            <form action="/review/update" method="post" name="updateForm">
+                <input type="hidden" name="id" th:value="${reviewUpdate.id}">
+                <input type="hidden" name="reviewHits" id="reviewHits" th:value="${reviewUpdate.reviewHits}">
+                <div class="board_write">
+                    <div class="title">
+                        <dl>
+                            <dt>제목</dt>
+                            <dd>
+                                <input type="text" name="reviewTitle" th:value="${reviewUpdate.reviewTitle}"
+                                       value="글 제목이 들어갑니다" oninput="characterCheck(this)">
+                                <div class="textLengthWrap">
+                                    <p class="textCount">0자</p>
+                                    <p class="textTotal">/20자</p>
+                                </div>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="info">
+                        <dl>
+                            <dt>작성자</dt>
+                            <dd><input type="text" name="reviewWriter" th:value="${reviewUpdate.reviewWriter}" readonly>
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt>상품 선택</dt>
+                            <select name="itemId" id="itemId">
+                                <option value="" selected disabled hidden>구매한 상품을 선택하세요</option>
+                                <option th:each="orderitem : ${orderitems}"
+                                        th:value="${orderitem.getId()}"
+                                        th:text="${orderitem.getOrderName()}"
+                                        th:selected="${orderitem.getId() == reviewUpdate.itemId}"
+                                        th:attr="data-value=${reviewUpdate.itemId}"></option>
+                            </select>
+                        </dl>
+                        <input type="hidden" id="reviewItemId" th:value="${reviewUpdate.itemId}"/>
+                        <dl class="updatePass-only">
+                            <dt>비밀번호</dt>
+                            <dd><input type="password" name="reviewPass" id="reviewPass"></dd>
+                        </dl>
+                    </div>
+
+                    <div class="cont">
+                        <div class="textLengthWrap">
+                            <p class="textCount">0자</p>
+                            <p class="textTotal">/500자</p>
+                        </div>
+                        <textarea id="textBox" name="reviewContents" th:text="${reviewUpdate.reviewContents}"
+                                  oninput="characterCheck(this)"></textarea>
+                    </div>
+                </div>
+                <div class="bt_wrap">
+                    <button type="submit" onclick="return reviewUpdate()" class="on">수정</button>
+                    <a th:href="@{/reviews}">취소</a>
+                </div>
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
+            </form>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script th:inline="javascript">
+                const reviewUpdate = () => {
+                    const pass = [[${reviewUpdate.reviewPass}]];
+                    const inputPass = document.getElementById("reviewPass").value;
+                    if (pass == inputPass) {
+                        document.updateForm.submit();
+                    } else {
+                        alert("비밀번호가 일치하지 않습니다!");
+                        return false;
+
+                    }
+                }
+
+                // select 요소 변경 시 value 속성 업데이트
+                document.getElementById('itemId').addEventListener('change', function () {
+                    var reviewItemId = document.getElementById('reviewItemId');
+                    var selectedOption = this.options[this.selectedIndex];
+                    reviewItemId.value = selectedOption.getAttribute('data-value');
+                })
+
+                $(document).ready(function() {
+                    // 제목 입력란 초기 값에서 글자 수 카운팅
+                    let titleInput = $('[name="reviewTitle"]');
+                    let titleContent = titleInput.val();
+                    let titleCountElement = titleInput.siblings('.textLengthWrap').find('.textCount');
+                    titleCountElement.text(titleContent.length + '자');
+
+                    titleInput.on('input', function() {
+                        let content = $(this).val();
+                        // 글자수 세기
+                        if (content.length === 0 || content === '') {
+                            titleCountElement.text('0자');
+                        } else {
+                            titleCountElement.text(content.length + '자');
+                        }
+
+                        // 글자수 제한
+                        let limit = 20; // 글자수 제한 설정
+                        if (content.length > limit) {
+                            // 20자로 제한
+                            $(this).val(content.substring(0, limit));
+                            titleCountElement.text(limit + '자'); // Update the count element to show the limit
+                            alert('제목은 ' + limit + '자까지 입력 가능합니다.');
+                        }
+                    });
+
+                    // 내용 입력란 초기 값에서 글자 수 카운팅
+                    let contentInput = $('#textBox');
+                    let content = contentInput.val();
+                    let contentCountElement = contentInput.siblings('.textLengthWrap').find('.textCount');
+                    contentCountElement.text(content.length + '자');
+
+                    contentInput.on('input', function() {
+                        let content = $(this).val();
+                        // 글자수 세기
+                        if (content.length === 0 || content === '') {
+                            contentCountElement.text('0자');
+                        } else {
+                            contentCountElement.text(content.length + '자');
+                        }
+
+                        // 글자수 제한
+                        let limit = 500; // 글자수 제한 설정
+                        if (content.length > limit) {
+                            // 500자로 제한
+                            $(this).val(content.substring(0, limit));
+                            contentCountElement.text(limit + '자'); // Update the count element to show the limit
+                            alert('글자수는 ' + limit + '자까지 입력 가능합니다.');
+                        }
+                    });
+                });
+
+
+                function characterCheck(obj) {
+                    var regExp = /[<>"'&;]/;
+                    var value = obj.value;
+
+                    if (regExp.test(value)) {
+                        alert("<, >, \", ', &는 입력하실 수 없습니다.");
+                        obj.value = value.replace(/[<>"'&;]/g, ""); // 입력한 특수문자 모두 제거
+                    }
+                }
+            </script>
+        </div>
+    </div>
+</div>
+</body>
+</html>

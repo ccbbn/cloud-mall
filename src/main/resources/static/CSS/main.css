@@ -1,0 +1,51 @@
+/*-------------------*/
+.slider {
+    display: none;
+}
+
+.main-slider-container {
+    z-index: 1;
+    min-width: 400px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.slider img {
+    height: 500px;
+
+}
+
+@keyframes fade {
+    from {opacity: 0.4}
+    to {opacity: 1}
+}
+
+.fade {
+    z-index: 1;
+    animation-name: fade;
+    animation-duration: 2s;
+}
+
+/*-------------------*/
+
+.item-list {
+    margin-top: 50px;
+    margin-bottom: 100px;
+    text-align: center;
+}
+
+.item-list article {
+    position: relative;
+    display: inline-block;
+    padding: 20px;
+    width: 300px;
+}
+
+.item-list article:hover {
+    transition: all 0.5s;
+    transform:scale(103%);
+}
+
+article img {
+    width: 100%;
+}

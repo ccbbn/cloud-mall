@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<link rel="stylesheet" href="/CSS/itemList.css">
+<th:block th:replace="fragments/head :: headFragment">
+</th:block>
+<body>
+<div class="container" id="'wrapper">
+    <th:block th:replace="fragments/header :: headerFragment"></th:block>
+    <th:block th:replace="fragments/navigation :: navigationFragment"></th:block>
+    <div class="list-title" th:each="item : ${items}"></div>
+    <div class="list-title" th:text="${type.toUpperCase()}">TOP</div>
+
+
+    <section class="item-list">
+        <div class="item-table">
+            <div class="items" th:each="item : ${items}">
+                <a href="product.html" th:href="@{|/form/itemList/${item.itemId}|}">
+                    <div class="item-image">
+                        <img name="file1" id="file1" th:src="|/item/images/${item.mainImg}|"/>
+                    </div>
+                    <div class="item-name" th:text="${item.itemName}">
+                        아이템이름자리
+                    </div>
+                    <div class="item-price" th:text="${#numbers.formatInteger(item.price, 3, 'COMMA') + '원'}">
+                        아이템 가격
+                    </div>
+                </a>
+            </div>
+            <div th:if="${not #strings.isEmpty(message)}" class="no-result-message" th:text="${message}"></div>
+        </div>
+        <div class="pagination">
+            <ul>
+                <li th:class="${page <= 1} ? 'disabled' : ''">
+                    <a href="#" th:href="@{|/form/itemList/type/${type}?page=${page - 1}|}" th:if="${page > 1}">Prev</a>
+                    <span th:if="${page <= 1}">Prev</span>
+                </li>
+                <li th:each="p : ${#numbers.sequence(firstPage, lastPage)}" th:class="${p == page} ? 'active' : ''">
+                    <a href="#" th:href="@{|/form/itemList/type/${type}?page=${p}|}" th:text="${p}"></a>
+                </li>
+                <li th:class="${page >= pageCount} ? 'disabled' : ''">
+                    <a href="#" th:href="@{|/form/itemList/type/${type}?page=${page + 1}|}" th:if="${page < pageCount}">Next</a>
+                    <span th:if="${page >= pageCount}">Next</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+
+    <div id="search-results">
+        <!-- 검색 결과가 이곳에 표시됩니다 -->
+        <p id="searching-for"></p>
+        <section id="search-list"></section>
+    </div>
+</div>
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/JS/search_item.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<link rel="stylesheet" href="/CSS/main.css">
+<th:block th:replace="fragments/head :: headFragment">
+</th:block>
+<body>
+<div class="container" id="'wrapper">
+    <th:block th:replace="fragments/header :: headerFragment"></th:block>
+    <th:block th:replace="fragments/navigation :: navigationFragment"></th:block>
+    <div id="search-results">
+        <!-- 검색 결과가 이곳에 표시됩니다 -->
+    </div>
+    <div class="main-slider-container">
+        <div class="slider fade"><img src="asset/slide_0.png" alt="slide0" style="width:100%"></div>
+        <div class="slider fade"><img src="asset/slide_1.jpg" alt="slide1" style="width:100%"></div>
+        <div class="slider fade"><img src="asset/slide_2.jpg" alt="slide2" style="width:100%"></div>
+        <div class="slider fade"><img src="asset/slide_3.jpg" alt="slide3" style="width:100%"></div>
+    </div>
+    <section class="item-list">
+        <article><a href="/form/itemList/8"><img src="/asset/6fd49a1b-b951-4297-b9cc-5c33e6b596e1.jpg" alt=""></a></article>
+        <article><a href="/form/itemList/14"><img src="/asset/bdefe133-b00c-4ccc-bab6-c2e0dd2988ce.jpg" alt=""></a></article>
+        <article><a href="/form/itemList/22"><img src="/asset/af580f71-b2d6-4807-bcf9-684be248a596.jpg" alt=""></a></article>
+    </section>
+
+</div>
+
+<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+<script src="/JS/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/JS/search_item.js"></script>
+</body>
+</html>
