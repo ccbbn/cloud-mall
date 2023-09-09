@@ -1,6 +1,7 @@
 package EZ.nomargin.controller;
 
 import EZ.nomargin.domain.member.Member;
+import EZ.nomargin.domain.member.Role;
 import EZ.nomargin.dto.JoinDto;
 import EZ.nomargin.repository.MemberRepository;
 import EZ.nomargin.service.MemberService;
@@ -14,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
