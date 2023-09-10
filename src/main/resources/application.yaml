@@ -17,3 +17,6 @@ server.servlet.session.timeout: 300
 spring.jpa.hibernate.ddl-auto: update
 
 spring.jpa.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+
+
+
