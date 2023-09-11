@@ -1,3 +1,6 @@
+file:
+  dir: c:/Users/kitri/Pictures/data/
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -13,3 +16,16 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  servlet:
+    multipart:
+      maxFileSize: 50MB
+
+server:
+  servlet:
+    session:
+      timeout: 300
+
+
+
+
+
