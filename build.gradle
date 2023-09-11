@@ -14,6 +14,11 @@ configurations {
 	}
 }
 
+bootJar {
+	duplicatesStrategy 'exclude' // 중복된 항목을 제외하고 첫 번째 항목을 사용합니다.
+}
+
+
 repositories {
 	mavenCentral()
 }
