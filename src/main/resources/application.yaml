@@ -1,6 +1,6 @@
 
 
-# spring.thymeleaf.prefix: classpath:/templates/
+spring.thymeleaf.prefix: classpath:/templates/
 #file.dir: c:/Users/kitri/Pictures/data/
 spring.servlet.multipart.maxFileSize: 50MB
 file.dir: /home/ubuntu/nomargin/src/main/resources/static/data/
