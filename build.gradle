@@ -37,7 +37,7 @@ dependencies {
 	//시큐리티 추가
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-	/***
+	/***`
 	 * mysql 연동 gradle
 	 */
 	implementation 'mysql:mysql-connector-java:8.1.0'
