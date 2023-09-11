@@ -40,9 +40,9 @@ dependencies {
 	/***`
 	 * mysql 연동 gradle
 	 */
-	implementation 'mysql:mysql-connector-java:8.1.0'
-	/*
-	runtimeOnly 'com.mysql:mysql-connector-j'*/
+//	runtimeOnly 'mysql:mysql-connector-java:8.1.0'
+
+	runtimeOnly 'com.mysql:mysql-connector-j'
 
 
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.1'
