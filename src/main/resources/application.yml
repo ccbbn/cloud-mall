@@ -1,5 +1,10 @@
 
 #file.dir= /home/ubuntu/nomargin/src/main/resources/static/data/
+
+filedir : ${dir}
+
+
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
