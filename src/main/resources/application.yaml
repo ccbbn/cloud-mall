@@ -3,7 +3,7 @@
 # spring.thymeleaf.prefix: classpath:/templates/
 #file.dir: c:/Users/kitri/Pictures/data/
 spring.servlet.multipart.maxFileSize: 50MB
-# file.dir: /home/ubuntu/nomargin/src/main/resources/static/data/
+file.dir: /home/ubuntu/nomargin/src/main/resources/static/data/
 
 spring.datasource.url: jdbc:mysql://${DB_SERVER}:${DB_PORT:3306}/${DB_NAME}
 spring.datasource.username: ${DB_USERNAME}
