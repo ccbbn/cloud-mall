@@ -1,7 +1,7 @@
 
 #file.dir= /home/ubuntu/nomargin/src/main/resources/static/data/
 
-file_dir : ${dir}
+#file_dir : ${dir}
 
 
 
