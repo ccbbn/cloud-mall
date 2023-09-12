@@ -24,6 +24,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  config:
+    name: db-config
   servlet:
     multipart:
       maxFileSize: 50MB
@@ -32,6 +34,10 @@ server:
   servlet:
     session:
       timeout: 300
+
+
+
+
 
 #file:
 #  dir: c:/Users/kitri/Pictures/data/
