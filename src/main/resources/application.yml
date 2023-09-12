@@ -4,6 +4,10 @@
 #file_dir : ${dir}
 
 
+file:
+  dir: ${my_dir}
+
+
 
 spring:
   datasource:
