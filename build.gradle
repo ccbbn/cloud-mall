@@ -48,7 +48,7 @@ dependencies {
 	/***`
 	 * mysql 연동 gradle
 	 */
-//	runtimeOnly 'mysql:mysql-connector-java:8.1.0'
+//	runtimeOnly 'mysql:mysql-connector-java:8.0.32'
 
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
