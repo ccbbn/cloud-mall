@@ -1,5 +1,6 @@
 package EZ.nomargin.file;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,8 +12,14 @@ import java.util.UUID;
 @Component
 public class FileStore {
 
-    @Value("${file.dir}")
-    private String fileDir;
+//    @Value("${file.dir}")
+    private final String fileDir;
+
+    @Autowired
+    public FileStore(@Value("${file.dir}") String fileDir) {
+        this.fileDir = fileDir;
+    }
+
 
     public String getFullPath(String filename) {
         return fileDir + filename;
