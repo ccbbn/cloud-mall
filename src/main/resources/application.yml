@@ -1,13 +1,8 @@
 
 #file.dir= /home/ubuntu/nomargin/src/main/resources/static/data/
 
-#file_dir : ${dir}
-
-
 file:
   dir: ${my_dir}
-
-
 
 spring:
   datasource:
@@ -24,12 +19,9 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-#  config:
-#    name: db-config
   servlet:
     multipart:
       maxFileSize: 50MB
-
 server:
   servlet:
     session:
